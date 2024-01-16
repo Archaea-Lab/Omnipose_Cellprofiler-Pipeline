@@ -4,7 +4,7 @@ For segmenting and tracking single cells during growth under a microscope. This 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **INSTALLATIONS:**
 
-*INSTALLATION OF OMNIPOSE*
+*INSTALLATION OF OMNIPOSE*\n
 For in-depth instructions refer to https://github.com/kevinjohncutler/omnipose
 
 The instructions below were used to install Omnipose on our lab computer to run using the GPU. Our lab computer runs "Windows 11 Home Edition" with a 64-bit processor. Our GPU is a NVIDIA GeForce RTX 4090.
