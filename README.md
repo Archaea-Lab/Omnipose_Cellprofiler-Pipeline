@@ -44,7 +44,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
 
-1. Open FIJI, start up the macros window, and run the "imagesToStack.py" script on the "outlines" directory
+1. Open FIJI, start up the macros window, and run the "imagesToStack.py" script on the "outlines" directory  **WRITE THIS SCRIPT**
 2. Save the stack output by FIJI and assess the segmentation.
 3. Now that you have the stack, delete all the individual outline images to save storage
 4. If all looks good and there is no need for training a custom model, delete all of the generated _seg.npy files. These files take up a huge amount of storage space and are unnecessary for analysis.
