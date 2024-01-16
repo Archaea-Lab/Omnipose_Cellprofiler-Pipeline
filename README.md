@@ -2,9 +2,9 @@
 
 For segmenting and tracking single cells during growth under a microscope. This pipeline uses Omnipose (https://github.com/kevinjohncutler/omnipose) to segment cells and Cellprofiler (https://github.com/CellProfiler) to track them. The Bisson Lab installs and uses omnipose through the use of Anaconda (https://www.anaconda.com/)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**INSTALLATIONS:**
+## INSTALLATIONS
 
-*INSTALLATION OF OMNIPOSE*\n
+### *INSTALLATION OF OMNIPOSE*
 For in-depth instructions refer to https://github.com/kevinjohncutler/omnipose
 
 The instructions below were used to install Omnipose on our lab computer to run using the GPU. Our lab computer runs "Windows 11 Home Edition" with a 64-bit processor. Our GPU is a NVIDIA GeForce RTX 4090.
@@ -17,14 +17,14 @@ The instructions below were used to install Omnipose on our lab computer to run 
 6. In terminal type "conda remove pytroch-cuda" then hit ENTER
 7. In terminal type "conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia" then hit ENTER
 
-*INSTALLATION OF CELLPROFILER*
+### *INSTALLATION OF CELLPROFILER*
 CellProfiler was installed using the default instructions from their website (cellprofiler.org)
 
-*INSTALLATION OF LabelsToROIs*
+### *INSTALLATION OF LabelsToROIs*
 LabelsToROIs is a imageJ FIJI macro installed using its default instructions (https://labelstorois.github.io)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**SEGMENTATION OF CELLS**
+## SEGMENTATION OF CELLS
 
 *Pre-omnipose processing of data*
 ---------------------------------
