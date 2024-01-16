@@ -65,4 +65,11 @@ The instructions below were used to install Omnipose on our lab computer to run 
 *insert description here*
 
 1. Run CellProfiler and open the "trackingSingleCells.cpproj" file
-2. 
+
+### Process CellProfiler Data
+*CellProfiler refers to cells as "object numbers" in its output but if we track a cell from frame to frame its object number can change especially if 
+1. There is movement of cells in the field of view and
+2. There is a high density of cells
+This is because "Object Numbers" 
+
+CellProfiler does two phases of tracking for LAP. The second phase is where it accounts for particles splitting (cell division). This second phase is key for our data however CellProfiler doesn't do this second phase calculations until after the entire first phase in completed. What this means is the window that pops up showing the tracking during CellProfiler's run only shows the first phase. 1. This is not useful to us and 2. is just wrong compared to the final output from the program. *
