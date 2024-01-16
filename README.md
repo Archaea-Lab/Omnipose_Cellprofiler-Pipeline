@@ -4,7 +4,7 @@ For segmenting and tracking single cells during growth under a microscope. This 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## INSTALLATIONS
 
-### *INSTALLATION OF OMNIPOSE*
+### INSTALLATION OF OMNIPOSE
 For in-depth instructions refer to https://github.com/kevinjohncutler/omnipose
 
 The instructions below were used to install Omnipose on our lab computer to run using the GPU. Our lab computer runs "Windows 11 Home Edition" with a 64-bit processor. Our GPU is a NVIDIA GeForce RTX 4090.
@@ -17,16 +17,16 @@ The instructions below were used to install Omnipose on our lab computer to run 
 6. In terminal type "conda remove pytroch-cuda" then hit ENTER
 7. In terminal type "conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia" then hit ENTER
 
-### *INSTALLATION OF CELLPROFILER*
+### INSTALLATION OF CELLPROFILER
 CellProfiler was installed using the default instructions from their website (cellprofiler.org)
 
-### *INSTALLATION OF LabelsToROIs*
+### INSTALLATION OF LabelsToROIs
 LabelsToROIs is a imageJ FIJI macro installed using its default instructions (https://labelstorois.github.io)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## SEGMENTATION OF CELLS
 
-*Pre-omnipose processing of data*
+### Pre-omnipose processing of data
 ---------------------------------
 Omnipose doesn't work on stacks of images so all timelapse stacks have to be made into folders contains each frame as a separate '.tif' file. The "splitStacks.py" script will do this for us.
 
@@ -36,8 +36,7 @@ Omnipose doesn't work on stacks of images so all timelapse stacks have to be mad
 4. A window will pop up asking where your data is. Select the Omnipose_Analysis folder
 5. When script is done, open the Ominipose_Analysis folder and remove the original timelapse file. Would should be left in the folder is the stack broken up into individual images for each frame
 
-*Running Omnipose*
-------------------
+### Running Omnipose
 Now that a stack has been made into a series of image files Omnipose can be run.
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
