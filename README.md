@@ -72,10 +72,11 @@ The instructions below were used to install Omnipose on our lab computer to run 
 ### Process CellProfiler Data
 *CellProfiler refers to cells as "object numbers" in its output but if we track a cell from frame to frame its object number can change especially if*
 
-*1. There is movement of cells in the field of view and*
+*1. There is movement of cells in the field of view and &*
+
 *2. There is a high density of cells*
 
-*This is because "Object Numbers" are assigned independently from frame to frame in the order of left to right and top to bottom. Cells are tracked as full lineages in CellProfiler but individual cells/cell cycles are not given clear, unique, identifiers. Finally, the tracking results CellProfiler shows you in the GUI comes from the first phase of LAP calculations, this first phase does not include the calculations done that allow for splitting of cells and so the visual tracking that pops up in the GUI is just flat out not correct. These calculations are done and the final output of numbers from CellProfiler includes this second LAP tracking phase, but we have no easy visual representation to asses the quality of the tracking. Running these next scripts will solve these issues*
+*This is because "Object Numbers" are assigned independently from frame to frame in the order of left to right and top to bottom. Cells are tracked as full lineages in CellProfiler but individual cells/cell cycles are not given clear, unique, identifiers. Finally, the tracking results CellProfiler shows you in the GUI comes from the first phase of LAP calculations, this first phase does not include the calculations done that allow for splitting of cells and so the visual tracking that pops up in the GUI is just flat out not correct. These calculations are done and the final output of numbers from CellProfiler includes this second LAP tracking phase, but we have no easy visual representation to asses the quality of the tracking. Running these next scripts will solve these issues.*
 
 *These issues with CellProfiler are documented here:*
 
