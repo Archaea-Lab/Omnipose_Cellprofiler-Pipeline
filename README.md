@@ -84,7 +84,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 *https://forum.image.sc/t/trackobjects-lap/14030*
 
- 1. Run "CP_analysis_withTrackAnalysis.py" script pointing the directory to the "FilterObjects.csv" that was output from CellProfiler
+ 1. Run "CP_analysis.py" script pointing the directory to the "FilterObjects.csv" that was output from CellProfiler
  2. The program is done when a graph is output display single cells' Area vs. Time
  3. Open the tracking '.tif' file that was output and assess the quality of the tracking
  4. If tracking looks good, you can use the output '.csv' file to for further graphing of data, where each cell has been given a unique 'Cell ID' number
