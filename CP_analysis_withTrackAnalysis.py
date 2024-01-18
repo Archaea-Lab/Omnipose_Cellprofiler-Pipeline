@@ -21,7 +21,10 @@ Output:
 Caveats:
 1. This program does not deal with a value of 3 (mitosis) or 4 (gap in track) from CellProfiler's 'TrackObjects_LinkType'
 
-
+To correctly run this program, scroll down to where the main function starts (LINE 227) and change the relevant information in the designated
+'USER INPUT INFORMATION' area. This includes the input and output directories, the name of your input and output files, the colors to use for the
+graph, the pixel-to-micron conversion information, the frame-to-frame time interval of your timelapses, and the type and ordering of the 
+information you want saved in the output file.
 """
 import pandas as pd
 import seaborn
@@ -231,6 +234,7 @@ def main():
     timeInterval = 15/60  #in hours
     outputDirectory = '/Users/johnmallon/Downloads/'
     outputFileName = 'cellsThroughTime.csv'
+    #this list determines which information and the ordering of it in the saved output '.csv' file
     outputColumnOrder = ['Lineage','cell ID','Location_Center_X','Location_Center_Y','Shape',
                          'ImageNumber','Time (hr)','Relative Time','Area','Aspect Ratio',
                          'Circularity','Solidity','Parent','Parent Area']
