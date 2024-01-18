@@ -66,8 +66,8 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 1. Run CellProfiler and open the "trackingSingleCells.cpproj" file
 2. Drag and drop, or open, the binary mask we generated from omnipose
-3. Update the metadata and grouping data by selecting their respective tabs and clicking the update buttons
-4. Run the program by hitting the play button
+3. Update the metadata and grouping data by selecting their respective tabs and clicking the update buttons. Sometimes you have to alternate between "Matching Any" and "Matching All" the rules to get CellProfiler to update correctly. We don't know why you have to do this sometimes and not all the time. Just do this until you see all of your frames pop into existance within the CellProfiler GUI.
+4. Run the program by hitting the play button. As it runs a window will pop up and update each frame with the outlines of objects it finds on top of the mask we used as input. Make sure this generall looks good.
 
 ### Process CellProfiler Data
 *CellProfiler refers to cells as "object numbers" in its output but if we track a cell from frame to frame its object number can change especially if*
