@@ -39,7 +39,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
 2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\Halofilin Small Sample\john\Omnipose_Analysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-3. When done create a 'masks' and a 'outlines' folders and store the appropriate output files accordingly in them.
+3. When Omnipose is done it will have stored the masks and the segmentation outlines in new folders called 'masks' and a 'outlines'.
 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
