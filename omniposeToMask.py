@@ -1,3 +1,12 @@
+"""
+author: johnmallon
+
+This script takes the 'label images' masks output by Omnipose, and uses the ROIs created by 'Labels to ROIs' to convert the masks to a binary form usable for CellProfiler. The individual masks for each frame are combined
+into a single stack. Make sure to MANUALLY save the stack after visual inspection.
+
+This script should be run in the imageJ macro window
+"""
+
 from ij import IJ, ImagePlus, ImageStack
 from ij.plugin.frame import RoiManager
 import os
@@ -5,6 +14,7 @@ import re
 
 
 def main():
+	print("Starting...")
 	loadFolder = IJ.getDirectory("Input_directory")
 	files = os.listdir(loadFolder)
 	tempList = []
@@ -34,6 +44,8 @@ def main():
 	output_image = ImagePlus("Stacked Images", stack)
 	output_image.setDimensions(1,1,len(files)) #set channels, Z, and T appropriately
 	output_image.show()
+	print("Finished converting masks to binary form.")
+	print("Done!")
 
 main()
 
