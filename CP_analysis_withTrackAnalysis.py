@@ -188,9 +188,9 @@ def visualizeTracking(data,outputDirectory):
     data['randomColor'].fillna('gray', inplace=True)
     cells = data.groupby('cell ID')
     im = io.imread('/Users/johnmallon/Downloads/131Frames.tif')
-    heightPixels, widthPixels, channels = image.shape
+    heightPixels, widthPixels, channels = im.shape
     dpi = 300
-    figSizeInches = (width_pixels / dpi, height_pixels / dpi)
+    figSizeInches = (widthPixels / dpi, heightPixels / dpi)
     stackedFrames = []
     plt.show()
     plt.ioff()
