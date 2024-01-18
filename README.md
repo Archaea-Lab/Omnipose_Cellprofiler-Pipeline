@@ -1,5 +1,7 @@
 # Omnipose_Cellprofiler-Pipeline
 
+Author: John Mallon
+
 For segmenting and tracking single cells during growth under a microscope. This pipeline uses Omnipose (https://github.com/kevinjohncutler/omnipose) to segment cells and Cellprofiler (https://github.com/CellProfiler) to track them. The Bisson Lab installs and uses omnipose through the use of Anaconda (https://www.anaconda.com/)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## INSTALLATIONS
