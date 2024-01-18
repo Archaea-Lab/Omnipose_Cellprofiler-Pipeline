@@ -66,7 +66,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 1. Run CellProfiler and open the "trackingSingleCells.cpproj" file
 2. Drag and drop, or open, the binary mask we generated from omnipose
-3. Update the metal data and grouping data by selecting their respective tabs and clicking the update buttons
+3. Update the metadata and grouping data by selecting their respective tabs and clicking the update buttons
 4. Run the program by hitting the play button
 
 ### Process CellProfiler Data
