@@ -1,10 +1,16 @@
-# Jython script to split a stack into individual images and save them
+"""
+Author: johnmallon
 
+This script will load in a '.tif' stack, split each frame into individual images and save those images to same directory as the stack. Omnipose works on single images and not stacks which is why we need to do this.
+
+This script should be run in the imageJ macro window.
+"""
 from ij import IJ, ImagePlus
 import os
 
 
 def main():
+	print("Starting...")
 	loadFolder = IJ.getDirectory("Input_directory")
 	for file in os.listdir(loadFolder):
 		f= os.path.join(loadFolder, file)
@@ -34,5 +40,7 @@ def main():
 
 	# Close the original stack
 	imp.close()
+	print("Finished splitting the stack and images are saved")
+	print("Done!")
 
 main()
