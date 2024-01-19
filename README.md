@@ -90,3 +90,9 @@ The instructions below were used to install Omnipose on our lab computer to run 
  2. The program is done when a graph is output display single cells' Area vs. Time
  3. Open the tracking '.tif' file that was output and assess the quality of the tracking
  4. If tracking looks good, you can use the output '.csv' file to for further graphing of data, where each cell has been given a unique 'Cell ID' number
+
+
+
+# Training a custom omnipose model
+
+Type <omnipose --train --use_gpu --dir "C:\Users\bisso\Desktop\omniposeTrain\crops" --mask_filer _masks --pretrained_model None --diameter 0 --learning_rate 0.1 --batch_size 16 --n_epochs 4000>
