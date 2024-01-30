@@ -95,4 +95,4 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 # Training a custom omnipose model
 
-Type <omnipose --train --use_gpu --dir "C:\Users\bisso\Desktop\omniposeTrain\crops" --mask_filer _masks --pretrained_model None --diameter 0 --learning_rate 0.1 --batch_size 16 --n_epochs 4000>
+Type <omnipose --train --use_gpu --dir "C:\Users\bisso\Desktop\omniposeTrain\crops" --mask_filter _masks --pretrained_model None --diameter 0 --learning_rate 0.1 --batch_size 16 --n_epochs 4000>
