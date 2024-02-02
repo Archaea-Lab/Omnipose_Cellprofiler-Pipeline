@@ -40,8 +40,8 @@ The instructions below were used to install Omnipose on our lab computer to run 
 *Now that a stack has been made into a series of image files Omnipose can be run.*
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
-2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_tif --in_folders". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders --no_npy". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_tif --in_folders --no_npy". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
 4. When Omnipose is done it will have stored the masks and the segmentation outlines in new folders called 'masks' and a 'outlines'.
 
 ### Assess Omnipose Results
@@ -50,7 +50,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 1. Open FIJI, start up the macros window, and run the "outlinesToStack.py" script on the "outlines" directory
 2. Save the stack output by FIJI and assess the segmentation.
 3. Now that you have the stack, delete all the individual outline images to save storage
-4. If all looks good and there is no need for training a custom model, delete all of the generated _seg.npy files. These files take up a huge amount of storage space and are unnecessary for analysis.
+4. If all doesn't look good. Rerun the omnipose with same command thought omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below)
 
 ### Convert Omnipose masks to actual masks
 *https://labelstorois.github.io does a great job of explaining why this is needed. In short, the output masks of omnipose is actually what is called a 'labeled image' not a binary mask. It is a greyscale image where each object detected by omnipose is given a unique number value. We want to convert this so that all objects have a value of 255 (white) and backgound has a value of 0 (black). The "labelstorois" FIJI plugin will create a '.zip' file of the ROIs segmented and the "omniposeToMasks.py" script will take those ROIs and create a binary mask image from them. To run "labelstorois" on a folder full of images though, all images have to have the suffix "_label.tif". Our "_labels.py" script will add this to our filenames.*
