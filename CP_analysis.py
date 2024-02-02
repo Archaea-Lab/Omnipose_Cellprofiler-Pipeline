@@ -26,6 +26,8 @@ To correctly run this program, scroll down to where the main function starts (LI
 graph, the pixel-to-micron conversion information, the frame-to-frame time interval of your timelapses, and the type and ordering of the 
 information you want saved in the output file.
 """
+
+
 import pandas as pd
 import seaborn
 import matplotlib.pyplot as plt
@@ -60,7 +62,6 @@ def findStartingCells(df):
     """
     cellID = 1
     cellList = []
-    cellsToRemove = []
     
     lineageStarts = df.loc[(df['TrackObjects_LinkType'] == 0) | (df['TrackObjects_LinkType'] == 2)]
     
@@ -68,7 +69,7 @@ def findStartingCells(df):
         cell = []
         cell.append([cellID,row])
         cellList.append(cell)
-        cellsToRemove.append(index)
+        df = df.drop(index)
         cellID += 1
     for cell in cellList:
         if cell[-1][1]['TrackObjects_LinkType'] == 2:
@@ -82,12 +83,11 @@ def findStartingCells(df):
                 newCell = []
                 newCell.append([cellID,row])
                 cellList.append(newCell)
-                cellsToRemove.append(index)
+                df = df.drop(index)
                 cellID += 1
-    #print('Number of cells found in tracking: ', len(cellList))
-    #print('Number of cells to remove :', len(cellsToRemove))
+    
  
-    return cellList, cellsToRemove, df
+    return cellList, df
 
 
 def findNextCell(df,currentCell):
@@ -97,7 +97,6 @@ def findNextCell(df,currentCell):
 
     This functions returns a a list of lists containing all instances of a single, cell-through-time.
     """
-    cellsToRemove = []
     cellID = currentCell[-1][0]
     currentFrame = currentCell[-1][1]['ImageNumber']
     currentObjectNumber = currentCell[-1][1]['ObjectNumber']
@@ -108,8 +107,7 @@ def findNextCell(df,currentCell):
     if not nextCell.empty:
         for index, row in nextCell.iterrows():
             currentCell.append([cellID,row])
-            cellsToRemove.append(index)
-        df = df.drop(cellsToRemove,inplace=False)
+            df = df.drop(index)
         findNextCell(df,currentCell)
         
     return currentCell
@@ -245,14 +243,14 @@ def visualizeTracking(data,outputDirectory,trackImageDirectory,trackImageFileNam
 def main():
     #####################################################
     ####### USER INPUT INFORMATION START HERE ###########
-    inputDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\\"
+    inputDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\segment images\\"
     inputFileName = "FilterObjects.csv"
     qualitative_colors = seaborn.color_palette("Set3")
     pixelConversion = 0.065  # Pixel conversion to um for a 100X objective using Bisson Lab Microscope (Tupan)
     timeInterval = 15/60  #in hours
-    trackImageDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\\"
-    trackImageFileName = "binaryMasks_cropoverlay.tiff"
-    outputDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\\"
+    trackImageDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\segment images\\"
+    trackImageFileName = "segmentation.tif"
+    outputDirectory = r"C:\Users\bisso\Desktop\Omnipose Pipeline\Omnipose Analysis\segment images\\"
     outputFileName = 'cellsThroughTime.csv'
     #this list determines which information and the ordering of it in the saved output '.csv' file
     outputColumnOrder = ['Lineage','cell ID','Location_Center_X','Location_Center_Y','Shape',
@@ -266,13 +264,12 @@ def main():
     #df = df[df['TrackObjects_LinkType']!=4]
     df = calculateShape(df,pixelConversion)
     df['Time (hr)'] = (df['ImageNumber']-1)*timeInterval
-    df = df[df['Circularity'] >= 0.4]
-    df = df[df['TrackObjects_FinalAge'] != 1]
+    #df = df[df['Circularity'] >= 0.4]
+    #df = df[df['TrackObjects_FinalAge'] != 1]
     initialDataSize = df.shape[0]
     print(initialDataSize)
     
-    cellList,cellsToRemove,df = findStartingCells(df)
-    df = df.drop(cellsToRemove)
+    cellList,df = findStartingCells(df)
     data = []
     for cell in cellList:
         stitchedCell = findNextCell(df,cell)
