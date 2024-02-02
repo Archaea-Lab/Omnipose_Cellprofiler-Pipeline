@@ -40,8 +40,8 @@ The instructions below were used to install Omnipose on our lab computer to run 
 *Now that a stack has been made into a series of image files Omnipose can be run.*
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
-2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\Halofilin Small Sample\john\Omnipose_Analysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\Halofilin Small Sample\john\Omnipose_Analysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_tif --in_folders". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\Omnipose_Analysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_tif --in_folders". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
 4. When Omnipose is done it will have stored the masks and the segmentation outlines in new folders called 'masks' and a 'outlines'.
 
 ### Assess Omnipose Results
