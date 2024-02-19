@@ -96,4 +96,18 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 # Training a custom omnipose model
 
-Type <omnipose --train --use_gpu --dir "C:\Users\bisso\Desktop\omniposeTrain\crops" --mask_filter _masks --pretrained_model None --diameter 0 --learning_rate 0.1 --batch_size 16 --n_epochs 4000>
+1. Put 510 X 510px sized images inside a folder that you want to use as a training set. Try not to use images that have way more background vs. foreground.
+2. Open a terminal in the omniposeGPU environment and type "omnipose". This will open the GUI.
+3. Drag and drop one of the training images into the GUI window and segment with one of the default models.
+4. Once ROIs/masks are populated in the window, manually fix the errors by:
+   a) control/left-click deletes masks
+   b) left-click to select a single mask then alt/left-click a second mask to merge them into a single mask
+   c) right-click to start drawing the edge of a mask. Move the mouse back into the red circle to complete the drawing.
+5. Click File-->save mask as .png
+6. Open the .png in FIJI and save as a .tif
+7. Put the .tif mask file into the same folder as the training images. Name it the same as the image it is associated with but with the "_masks.tif" extension
+8. Do this for all images in the training folder. If all is set you can delete the .png files.
+9. In the omniposeGPU terminal type: <omnipose --train --use_gpu --dir "C:\Users\bisso\Desktop\omniposeTrain\crops" --mask_filter _masks --pretrained_model None --diameter 0 --learning_rate 0.1 --batch_size 16 --n_epochs 4000>
+   a) Most of these settings I just took from "omnipose.readthedocs.io" For a trainging set of 122 images I used a batch_size of 16. If you have fewer training images perhaps make this number lower. 
+10. Trained model will now be in a "models" folder within the trainset folder. You can rename the file to something more useful.
+11. You can now load this model into the Omnipose GUI and test it to see how it behaves. Repeat steps 4 through 9 accordingly.
