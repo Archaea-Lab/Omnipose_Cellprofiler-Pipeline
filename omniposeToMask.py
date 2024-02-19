@@ -37,6 +37,7 @@ def main():
     		i = list(range(len(roiList)))
     		rm.setSelectedIndexes(i)
     		rm.runCommand(imp,"Combine")
+		IJ.run(imp,"Clear Outside","")
     		rm.runCommand(imp,"Fill")
     		stack.addSlice(file_name, imp.getProcessor())
 		# Close the ImagePlus to free up resources
