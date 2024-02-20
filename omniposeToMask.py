@@ -40,6 +40,7 @@ def main():
     		i = list(range(len(roiList)))
     		rm.setSelectedIndexes(i)
     		rm.runCommand(imp,"Fill")
+		IJ.run(imp, "8-bit", "")
     		stack.addSlice(file_name, imp.getProcessor())
 		# Close the ImagePlus to free up resources
     		#imp.close()
