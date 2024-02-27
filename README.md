@@ -15,7 +15,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 3. In terminal type "conda activate omniposeGPU" then hit ENTER
 4. In terminal type "pip install omnipose" then hit ENTER
 5. In terminal type "pip install natsort" then hit ENTER
-6. In terminal type "conda remove pytroch-cuda" then hit ENTER
+6. In terminal type "conda remove pytorch-cuda" then hit ENTER
 7. In terminal type "conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia" then hit ENTER
 
 ### INSTALLATION OF CELLPROFILER
