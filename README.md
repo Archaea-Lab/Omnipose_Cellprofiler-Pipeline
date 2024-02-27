@@ -62,7 +62,7 @@ We now need to convert the '.txt' files Omnipose generated to ROIs usuable by im
 2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
 3. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
 4. Now that you have the masks, delete the 'outlines' , 'txt_outlines' and 'masks' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
-5. Repeat this entire section for each additional channel you need to segment with Omnipose.
+5. For each additional channel you need segmented by Omnipose, repeat everything above from step 7 of "Pre-omnipose processing of data" onward.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## TRACKING OF CELLS
