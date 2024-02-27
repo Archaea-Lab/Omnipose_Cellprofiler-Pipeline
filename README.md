@@ -20,10 +20,6 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 ### INSTALLATION OF CELLPROFILER
 *CellProfiler was installed using the default instructions from their website (cellprofiler.org)*
-
-### INSTALLATION OF LabelsToROIs
-*LabelsToROIs is a imageJ FIJI macro installed using its default instructions (https://labelstorois.github.io)*
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## SEGMENTATION OF CELLS
 
@@ -41,25 +37,24 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
 2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders --no_npy --exclude_on_edges". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\cells\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_tif --in_folders --no_npy --exclude_on_edges". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\cells\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
 4. When Omnipose is done it will have stored the masks and the segmentation outlines in new folders called 'masks' and a 'outlines'.
 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
 
 1. Open FIJI, start up the macros window, and run the "outlinesToStack.py" script on the "outlines" directory
-2. Save the stack output by FIJI and assess the segmentation.
+2. Save the stack output by imageJ to the 'omniposeAnalysis' folder and assess the segmentation.
 3. Now that you have the stack, delete all the individual outline images to save storage
 4. If all doesn't look good. Rerun the omnipose with same command thought omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below)
 
 ### Convert Omnipose masks to actual masks
-*https://labelstorois.github.io does a great job of explaining why this is needed. In short, the output masks of omnipose is actually what is called a 'labeled image' not a binary mask. It is a greyscale image where each object detected by omnipose is given a unique number value. We want to convert this so that all objects have a value of 255 (white) and backgound has a value of 0 (black). The "labelstorois" FIJI plugin will create a '.zip' file of the ROIs segmented and the "omniposeToMasks.py" script will take those ROIs and create a binary mask image from them. To run "labelstorois" on a folder full of images though, all images have to have the suffix "_label.tif". Our "_labels.py" script will add this to our filenames.*
+We now need to convert the .txt files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
 
-1. Run "_label.py" script using the "masks" folder as the directory
-2. In FIJI open the plugin "LabelsToRoi" and run the multiple image button with an erode by 1 pixel using the "masks" directory
-3. Run the FIJI macro "omniposeToMask.py"
-4. Save the binary mask stack that gets output by FIJI
-5. Now that you have the stack, delete all the individual images to save storage
+1. Run the imageJ macro "generateROIsAndBinaryMasks.py"
+2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
+4. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
+5. Now that you have the masks, delete the 'outlines' and 'txt_outlines' folders and all the individual images to save storage. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## TRACKING OF CELLS
