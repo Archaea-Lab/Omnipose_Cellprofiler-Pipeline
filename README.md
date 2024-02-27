@@ -89,8 +89,7 @@ We now need to convert the .txt files Omnipose generated to ROIs usuable by imag
  3. Open the tracking '.tif' file that was output and assess the quality of the tracking
  4. If tracking looks good, you can use the output '.csv' file to for further graphing of data, where each cell has been given a unique 'Cell ID' number
 
-
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Training a custom omnipose model
 
 1. Put 510 X 510px sized images inside a folder that you want to use as a training set. Try not to use images that have way more background vs. foreground.
