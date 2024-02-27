@@ -14,7 +14,6 @@ def main():
 	loadFolder = IJ.getDirectory("Input_directory")
 	for file in os.listdir(loadFolder):
 		f= os.path.join(loadFolder, file)
-	# Get the active image stack
 
 	imp = IJ.openImage(f)
 	stack = imp.getStack()
@@ -36,7 +35,7 @@ def main():
     		IJ.save(duplicate_image, save_path)
 
     		# Close the duplicated slice
-   		 duplicate_image.close()
+   		duplicate_image.close()
 
 	# Close the original stack
 	imp.close()
