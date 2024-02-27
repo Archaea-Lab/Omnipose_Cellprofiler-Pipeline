@@ -46,7 +46,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 2. For using pretrained Ominpose models use step 3a. For Bisson Lab custom models use step 3b instead. 
 3a. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Also change the pretrained model name to the appropriate one you want to use. "bact_phase_omni" is the default Omnipose model for segmenting cells in phase channel images. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
 3b. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\cells\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-4. When Omnipose is done it will have stored the segmentation outlines and ROIs as txt files in new folders called 'outlines' and 'txt_outlines'.
+4. When Omnipose is done it will have stored the segmentation outlines and ROIs as txt files in new folders called 'outlines' and 'txt_outlines'. It also creates a "masks" folder that you can ignore because it is empty.
 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
@@ -61,7 +61,7 @@ We now need to convert the '.txt' files Omnipose generated to ROIs usuable by im
 1. Run the imageJ macro "generateROIsAndBinaryMasks.py"
 2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
 4. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
-5. Now that you have the masks, delete the 'outlines' and 'txt_outlines' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
+5. Now that you have the masks, delete the 'outlines' , 'txt_outlines' and 'masks' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## TRACKING OF CELLS
