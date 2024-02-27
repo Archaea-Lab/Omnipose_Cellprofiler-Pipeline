@@ -15,7 +15,7 @@ from ij import IJ
 def main():
     print("Starting...")
     loadFolder = IJ.getDirectory("Input_directory")
-    files = os.listdir(folder)
+    files = os.listdir(loadFolder)
     for file in files:
         oldPath = os.path.join(loadFolder, file)
         if os.path.isfile(oldPath):
