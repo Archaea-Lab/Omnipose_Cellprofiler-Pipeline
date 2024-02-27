@@ -31,7 +31,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 *Omnipose doesn't work on stacks of images so all timelapse stacks have to be made into folders contains each frame as a separate '.tif' file. The "splitStacks.py" script will do this for us.*
 
 1. Create a folder and call it "Omnipose_Analysis"
-2. Drop a timelapse file into Omnipose_Analysis folder
+2. Drop a single channel of a timelapse file to be segmented into Omnipose_Analysis folder
 3. Open FIJI, start up the macros window, and run the "splitStacks.py" script
 4. A window will pop up asking where your data is. Select the Omnipose_Analysis folder
 5. When script is done, open the Ominipose_Analysis folder and remove the original timelapse file. Would should be left in the folder is the stack broken up into individual images for each frame
