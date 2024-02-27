@@ -26,37 +26,42 @@ The instructions below were used to install Omnipose on our lab computer to run 
 ## SEGMENTATION OF CELLS
 
 ### Pre-omnipose processing of data
-*Omnipose doesn't work on stacks of images so all timelapse stacks have to be made into folders contains each frame as a separate '.tif' file. The "splitStacks.py" script will do this for us.*
+*Omnipose doesn't work on stacks of images so all timelapse stacks have to be made into folders contains each frame as a separate '.tif' file. The "splitStacks.py" script will do this for us. If your data is already in the form of single '.tif' images, it will still be essential for us to create a stacked version of the data for later steps...*
 
 1. Create a folder and call it "Omnipose_Analysis"
-2. Drop a single channel of a timelapse file to be segmented into Omnipose_Analysis folder
+2. All analysis done by Ominpose will be on SINGLE CHANNEL images. If you have more than one channel the first thing to do is, in imageJ, click Image --> Color --> Split Channels and save each channel as a separate '.tif' file
+3. Are you running an analysis on a stack? If yes, skip to step 7
+4. If you have a folder with a bunch of images not in a stack, we should create a stack of those images. Open FIJI, start up the macros window, and run the "imagesToStack.py" script.
+5. A window will pop up asking where your data is. Select the folder that contains all the images.
+6. Save the stack output by imageJ
+7. Drop the single channel stack of your data, to be segmented by Omnipose, into Omnipose_Analysis folder
 3. Open FIJI, start up the macros window, and run the "splitStacks.py" script
 4. A window will pop up asking where your data is. Select the Omnipose_Analysis folder
-5. When script is done, open the Ominipose_Analysis folder and remove the original timelapse file. Would should be left in the folder is the stack broken up into individual images for each frame
+5. When script is done, open the Ominipose_Analysis folder and remove the original stack file. What should be left in the folder is the stack broken up into individual images.
 
 ### Running Omnipose
 *Now that a stack has been made into a series of image files Omnipose can be run.*
 
 1. Go to environments tab of Anaconda GUI and switch your "omniposeGPU" environment and open a terminal
-2. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_tif --in_folders --no_npy --exclude_on_edges". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-3. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\cells\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
-4. When Omnipose is done it will have stored the masks and the segmentation outlines in new folders called 'masks' and a 'outlines'.
+2. For using pretrained Ominpose models use step 3a. For Bisson Lab custom models use step 3b instead. 
+3a. In the terminal type "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model bact_phase_omni --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directory so that it points to your Omnipose_Analysis folder correctly. Also change the pretrained model name to the appropriate one you want to use. "bact_phase_omni" is the default Omnipose model for segmenting cells in phase channel images. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+3b. If using a custom model type this instead "omnipose --dir "C:\Users\bisso\Desktop\omniposeAnalysis" --use_gpu --pretrained_model "C:\Users\bisso\Desktop\omniposeTrain\cells\crops\models\custom_volcaniiRodDisk" --dim 2 --nclasses 2 --nchan 1 --save_outlines --save_txt --in_folders --no_npy --exclude_on_edges". Switch out the directories so that they point to your Omnipose_Analysis folder and custom model correctly. Then hit ENTER. Omnipose will run in the terminal. It will update there as to its progress.
+4. When Omnipose is done it will have stored the segmentation outlines and ROIs as txt files in new folders called 'outlines' and 'txt_outlines'.
 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
 
-1. Open FIJI, start up the macros window, and run the "outlinesToStack.py" script on the "outlines" directory
+1. Open FIJI, start up the macros window, and run the "imagesToStack.py" script on the "outlines" directory
 2. Save the stack output by imageJ to the 'omniposeAnalysis' folder and assess the segmentation.
-3. Now that you have the stack, delete all the individual outline images to save storage
-4. If all doesn't look good. Rerun the omnipose with same command thought omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below)
+3. If all doesn't look good. Rerun Omnipose (from step 3a/3b above) with same command though omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below). If segmentation looks good, continue on.
 
 ### Convert Omnipose masks to actual masks
-We now need to convert the .txt files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
+We now need to convert the '.txt' files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
 
 1. Run the imageJ macro "generateROIsAndBinaryMasks.py"
 2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
 4. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
-5. Now that you have the masks, delete the 'outlines' and 'txt_outlines' folders and all the individual images to save storage. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
+5. Now that you have the masks, delete the 'outlines' and 'txt_outlines' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## TRACKING OF CELLS
