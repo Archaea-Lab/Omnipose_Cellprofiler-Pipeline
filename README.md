@@ -71,9 +71,14 @@ We now need to convert the '.txt' files Omnipose generated to ROIs usuable by im
 *CellProfiler will take the binary masks we generated from Omnipose's segmentation and use that to track our cells using the Linear Assignment Problem (LAP) algorithm.*
 
 1. Run CellProfiler and open the "trackingSingleCells.cpproj" file
-2. Drag and drop, or open, the binary mask we generated from omnipose
-3. Update the metadata and grouping data by selecting their respective tabs and clicking the update buttons. Sometimes you have to alternate between "Matching Any" and "Matching All" the rules to get CellProfiler to update correctly. We don't know why you have to do this sometimes and not all the time. Just do this until you see all of your frames pop into existance within the CellProfiler GUI.
-4. Run the program by hitting the play button. As it runs a window will pop up and update each frame with the outlines of objects it finds on top of the mask we used as input. Make sure this generally looks good.
+2. Drag and drop, the binary mask and raw data into the 'Image' tab
+3. Open the 'Metadata' tab and click the 'Extract metadata' button.
+4. Open the 'NamesAndTypes' tab and correctly assign each file to the right object/type. By default, it is set up so that your raw data is a two channel image with the word 'data' somewhere in the file name, the GFP binary mask contains 'gfp_binaryMasks' in the filename, and the Phase binary mask contains 'phase_binaryMasks' in the filename.
+5. Click 'Update' button and the table should populate your files correctly. If it doesn't make sure you did step 4 correctly.
+6. Open the 'SaveImages' tab and make sure the save directory is the 'omniposeAnalysis' folder
+7. Open the 'ExportToSpreadsheet' tab and make sure the save directory is the 'omniposeAnalysis' folder
+8. Also in the 'ExportToSpreadsheet' tab click the 'Press button to select measurements' button to review what measurements you want to save. Don't bother with 'Cells' data. 'FilterCells' contains all the cellular measurments. Here is a list of what CellProfiler can measure: https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.0.0/modules/measurement.html
+9. Run the program by hitting the play button. As it runs a window will pop up and update each frame with the outlines of objects it finds on top of the mask we used as input. Make sure this generally looks good.
 
 ### Process CellProfiler Data
 *CellProfiler refers to cells as "object numbers" in its output but if we track a cell from frame to frame its object number can change especially if*
@@ -90,10 +95,19 @@ We now need to convert the '.txt' files Omnipose generated to ROIs usuable by im
 
 *https://forum.image.sc/t/trackobjects-lap/14030*
 
- 1. Run "CP_analysis.py" script pointing the directory to the "FilterObjects.csv" that was output from CellProfiler
- 2. The program is done when a graph is output display single cells' Area vs. Time
- 3. Open the tracking '.tif' file that was output and assess the quality of the tracking
- 4. If tracking looks good, you can use the output '.csv' file to for further graphing of data, where each cell has been given a unique 'Cell ID' number
+ 1. Open "CP_analysis.py" script pointing the directory to the "FilterObjects.csv" that was output from CellProfiler. You also must specify:
+  - if the data is from a timelapse (True) or not (False).
+  - pixel conversion factor for the objective used
+  - the time interval used
+  - if a timelapse, the directory and filname of the image you want to draw the tracks on (I suggest the stack of the phase channel only)
+  - output file name and directory (I at least suggest the omniposeAnalysis folder)
+  - the columns of data you want to take from the 'FilterCells.csv' generated from CellProfiler. There is a bunch of columns that CellProfiler measures that are not necessary for most of our analysis. This is where you can customize the output of the data for your  specific analysis needs. You just need to add the column names from 'FilterCells.csv' here that you want to keep.
+ 
+ 
+ 2. Run the script by pressing the 'play' button
+ 3. The program will display 'Finished!!!' when done.
+ 4. For a timelapse, open the tracking '.tif' file that was output and assess the quality of the tracking
+ 5. If tracking looks good, you can use the output '.csv' file for further graphing of data, where each cell has been given a unique 'Cell ID' number. If tracking isn't great, you may have to play with the tracking parameters in CellProfiler
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Training a custom omnipose model
