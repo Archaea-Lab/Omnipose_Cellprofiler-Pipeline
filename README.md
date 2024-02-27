@@ -20,6 +20,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 
 ### INSTALLATION OF CELLPROFILER
 *CellProfiler was installed using the default instructions from their website (cellprofiler.org)*
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## SEGMENTATION OF CELLS
 
