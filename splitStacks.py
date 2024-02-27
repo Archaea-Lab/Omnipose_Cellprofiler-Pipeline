@@ -36,7 +36,7 @@ def main():
     		IJ.save(duplicate_image, save_path)
 
     		# Close the duplicated slice
-   		 duplicate_image.close()
+   		duplicate_image.close()
 
 	# Close the original stack
 	imp.close()
