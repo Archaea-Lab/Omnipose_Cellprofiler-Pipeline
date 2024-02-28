@@ -11,10 +11,14 @@ import re
 
 
 def main():
+	################# USER INPUT STARTS HERE ##########################
+	timelapse = False
+	################# USER INPUT ENDS HERE ##########################
 	print("Starting...")
 	loadFolder = IJ.getDirectory("Input_directory")
 	files = os.listdir(loadFolder)
-	files.sort(key=lambda x: int(re.search(r'^(\d+)_', x).group(1)))
+	if timelapse:
+		files.sort(key=lambda x: int(re.search(r'^(\d+)_', x).group(1)))
 	stack = ImageStack()
 
 	for frame in files:
