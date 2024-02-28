@@ -70,7 +70,9 @@ def imagej_roi_converter(rois,loadFolder,stack):
     
     
 def main():
-    timelapse = True
+    ################# USER INPUT STARTS HERE ##########################
+	timelapse = False
+	################# USER INPUT ENDS HERE ##########################
     print("Starting...")
     loadFolder = IJ.getDirectory("Input_directory") #select the 'txt_outlines' folder that omnipose generated
     files = os.listdir(loadFolder)
