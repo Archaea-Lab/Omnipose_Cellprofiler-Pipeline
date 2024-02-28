@@ -70,10 +70,12 @@ def imagej_roi_converter(rois,loadFolder,stack):
     
     
 def main():
+    timelapse = True
     print("Starting...")
     loadFolder = IJ.getDirectory("Input_directory") #select the 'txt_outlines' folder that omnipose generated
     files = os.listdir(loadFolder)
-    files.sort(key=lambda x: int(re.search(r'^(\d+)_', x).group(1)))
+    if timelapse:
+        files.sort(key=lambda x: int(re.search(r'^(\d+)_', x).group(1)))
     maskStack = ImageStack()
     for rois in files:
         file_path = os.path.join(loadFolder, rois)
