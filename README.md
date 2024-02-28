@@ -55,7 +55,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 2. Save the stack output by imageJ to the 'omniposeAnalysis' folder and assess the segmentation.
 3. If all doesn't look good. Rerun Omnipose (from step 3a/3b above) with same command though omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below). If segmentation looks good, continue on.
 
-### Convert Omnipose masks to actual masks
+### Convert Omnipose ROI txt files to binary masks
 We now need to convert the '.txt' files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
 
 1. Open the imageJ macro "generateROIsAndBinaryMasks.py". Scroll down to the main function and set timelapse = to True or False accordingly. Then run the macro.
