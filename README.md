@@ -51,14 +51,14 @@ The instructions below were used to install Omnipose on our lab computer to run 
 ### Assess Omnipose Results
 *Omnipose has saved the masks and the outlines of those masks as images in the Omnipose_Analysis folder when it is done. The segmentation needs to be assessed for quality before moving forward. The next steps will take the outline images and convert them back to a stack for viewing.*
 
-1. Open FIJI, start up the macros window, and run the "imagesToStack.py" script on the "outlines" directory
+1. Open FIJI, start up the macros window, and run the "imagesToStack.py" script on the "outlines" directory. Make sure you first scroll down to main function and set the "timelapse" variable to 'True' or 'False' accordingly.
 2. Save the stack output by imageJ to the 'omniposeAnalysis' folder and assess the segmentation.
 3. If all doesn't look good. Rerun Omnipose (from step 3a/3b above) with same command though omit the "--no_npy" argument. This will allow you to load the masks in the omnipose GUI to manually correct for training purposes. (See Training Section Below). If segmentation looks good, continue on.
 
 ### Convert Omnipose ROI txt files to binary masks
 We now need to convert the '.txt' files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
 
-1. Open the imageJ macro "generateROIsAndBinaryMasks.py". Scroll down to the main function and set timelapse = to True or False accordingly. Then run the macro.
+1. Open the imageJ macro "generateROIsAndBinaryMasks.py". Make sure you first scroll down to main function and set the "timelapse" variable to 'True' or 'False' accordingly.
 2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
 3. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
 4. Now that you have the masks, delete the 'outlines' , 'txt_outlines' and 'masks' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
