@@ -58,7 +58,7 @@ The instructions below were used to install Omnipose on our lab computer to run 
 ### Convert Omnipose ROI txt files to binary masks
 We now need to convert the '.txt' files Omnipose generated to ROIs usuable by imageJ. Then use the ROIs to make a binary mask where the background is set to 0 (black) and the foreground is set to 255 (white).
 
-1. Open the imageJ macro "generateROIsAndBinaryMasks.py". Make sure you first scroll down to main function and set the "timelapse" variable to 'True' or 'False' accordingly.
+1. Open the imageJ macro "generateROIsAndBinaryMasks.py". Make sure you first scroll down to main function and set the "timelapse" and "foci" variables to 'True' or 'False' accordingly.
 2. A window will pop up asking for a folder. Selected the 'txt_outlines' folder generated from Omnipose
 3. Save the binary mask stack that is output by imageJ. The ROIs are saved as '.zip' files automatically to the 'omniposeAnalysis' folder
 4. Now that you have the masks, delete the 'outlines' , 'txt_outlines' and 'masks' folders and all the individual images. You should be left with a stack of the original images, a stack of the binary masks, and the '.zip' files of the ROIs
