@@ -24,8 +24,8 @@ from ij.gui import PolygonRoi
 from ij.gui import Roi
 from java.awt import FileDialog
 
-def imagej_roi_converter(rois,loadFolder,stack):
-    imageDirectory = rois.split('txt_outlines\\')
+def imagej_roi_converter(rois,loadFolder,stack,foci):
+    imageDirectory = rois.split('txt_outlines')
     imageName = imageDirectory[1].split('_cp')[0]+'.tif'
     imagePath = imageDirectory[0]+imageName
     imp = IJ.openImage(imagePath)
@@ -58,11 +58,12 @@ def imagej_roi_converter(rois,loadFolder,stack):
     roiList = rm.getRoisAsArray()
     i = list(range(len(roiList)))
     rm.setSelectedIndexes(i)
-    
     rm.save(imageDirectory[0]+imageDirectory[1][:-4]+'_ROIs.zip')
     IJ.setForegroundColor(255, 255, 255)
     rm.runCommand(imp,"Fill")
     IJ.run(imp, "8-bit", "")
+    if not foci:
+        IJ.run(imp, "Erode", "")
     stack.addSlice(imageName, imp.getProcessor())
     #imp.close()
     
@@ -70,9 +71,10 @@ def imagej_roi_converter(rois,loadFolder,stack):
     
     
 def main():
-    ################# USER INPUT STARTS HERE ##########################
-	timelapse = False
-	################# USER INPUT ENDS HERE ##########################
+    ############### USER INPUT STARTS HERE ###############
+    timelapse = True
+    foci = False
+    ############### USEWR INPUT ENDS HERE ###############
     print("Starting...")
     loadFolder = IJ.getDirectory("Input_directory") #select the 'txt_outlines' folder that omnipose generated
     files = os.listdir(loadFolder)
@@ -81,8 +83,10 @@ def main():
     maskStack = ImageStack()
     for rois in files:
         file_path = os.path.join(loadFolder, rois)
-        maskStack = imagej_roi_converter(file_path,loadFolder,maskStack) 
+        maskStack = imagej_roi_converter(file_path,loadFolder,maskStack,foci) 
     outputMask = ImagePlus("Stacked Masks", maskStack)
     outputMask.setDimensions(1,1,len(files)) #set channels, Z, and T appropriately
     outputMask.show()
+    print('Finished!!!')
+    
 main()
